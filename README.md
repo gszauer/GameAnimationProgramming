@@ -4,6 +4,8 @@
 
 **[Gabor Szauer](https://twitter.com/gszauer/)**
 
+> This page takes a high level look at some the content covered in chapters 8, 9 and 10 of Hands-On C++ Game Animation Programming. The book provides more in depth coverage of these topics, as well as coverage of advanced topics like Inverse Kinematics, Dual Quaternion Skinning and Crowd Rendering. 
+
 **Chapters 1, 2, 3, 4, 5 and 6** cover the basics, everything you need to know before implementing an animation system. This means Opening a Win32 OpenGL window, math and building an OpenGL abstraction layer.
 
 **Chapter 6, 7, 8, 9 and 10** will teach you how to load skinned models from GLTF files, and how to animate them. By the end of Chapter 10, you will have built a feature complete skeletal animation system.
@@ -589,7 +591,15 @@ The joint is an index into the transform array inside the ```Pose``` class. In t
 
 ![Vertices attached to forearm](Figures/Github/forearm.png)
 
+Each bone describes one transformation that the highlighted part of the mesh must take to reach its desired position. The following image shows all the steps that the fore-arm mesh would have to take to be transformed from the origin of the world to its desired position and highlights the transformation that each bone will apply to the mesh.
+
+![Steps to forearm](Figures/Github/steps.png)
+
 To deform these vertices along with the bone, we need to introduce a new space to the vertex transform pipeline, **Skin Space**. Skin space is a confusing topic, it's covered more in depth in the book than here. The idea of skin space is to move all vertices in a way that if they are multiplied by the rest pose matrix of the bone they belong to, the vertices end up back in bind pose.
+
+The image below shows the fore-arm mesh only in skin space. The rest of the mesh remains untouched. Each bone describes one transformation the vertices must make to end up in their desired position.
+
+![Steps to forearm](Figures/Github/skin_forearm.png)
 
 How is this skin space useful? Multiplying a skin space vertex by the bind pose of the bone it belongs to puts the vertex back into it's bind pose, but multiplying it by an animated pose will deform the vertex to match that animation.
 
@@ -650,6 +660,10 @@ You can combine the inverse bind pose and animated pose matrices into one skin m
 This skinning calcualtion can be done on the CPU or the GPU. The most common method for skinning meshes is matrix palette skinning. Both CPU and GPU skinning are covered in the book.Rigid skinning is easy to implement, but it doesn't look great. There can be visual breaks in the mesh, and artists need to add relief vertices. The image below shows how relief vertices work
 
 ![Relief vertes](Figures/Github/relief.png)
+
+Visualizing skin space doesn't make a lot of sense, all of the triangles in a mesh tend to collapse close to origin (0, 0, 0) with some of the larger shapes still making sense. Generally if you see the skin space blob it means an error in the transformation pipeline. For the sake of completeness, the above model looks like this when in skin space:
+
+![Steps to forearm](Figures/Github/skin_all.png)
 
 Modern aniamtion system don't typically use rigid skinning, instead they use smooth skinning, which will be covered next.
 
