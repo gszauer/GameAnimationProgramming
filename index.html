@@ -4,7 +4,7 @@
         <meta charset="utf-8">
 
         <title>Game Animation Programming</title>
-        <meta name="description" content="Game Animation Programming">
+        <meta name="description" content="Hands-On C++ Game Animation Programming">
         <meta name="author" content="Gabor Szauer">
 
         <!-- Support functions -->
@@ -27,27 +27,50 @@
         <script src="bezier_demo.js"></script>
         <script src="main.js"></script>
 
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap" rel="stylesheet">
         <link href="main.css" rel="stylesheet">
+
+        <!-- Google -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-96941899-5"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-96941899-5');
+		</script>
+
     </head>
 
     <body>
-        <div class="header">
-            <div class="left">
-                <img src="cover.png" class="himage" alt="Hands On Game Animation Programming" />
-            </div>
-            <div class="right">
-                <h1 class="title">Hands-On C++ Game Animation Programming</h1>
-                <span class="subtitle">Learn modern animation techniques from theory to implementation with C++</span>
-                <span class="author"><a href="https://twitter.com/gszauer">Gabor Szauer</a></span>
-                <a href="https://www.amazon.com/Hands-Game-Animation-Programming-implementation/dp/1800208081/" class="extern">Buy on Amazon</a>
-                <a href="https://www.packtpub.com/business-other/hands-on-game-animation-programming" class="extern">Buy from Packt</a>
-                <a href="https://github.com/gszauer/GameAnimationProgramming" class="extern">Code on github</a>
+        <div class="top-content">
+        	<div class="header" style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px;">
+	            <div class="left">
+	                <img src="cover.png" class="himage" alt="Hands On Game Animation Programming" />
+	            </div>
+	            <div class="right">
+	                <h1 class="title">Hands-On C++ Game Animation Programming</h1>
+	                <span class="subtitle">Learn modern animation techniques from theory to implementation with C++</span>
+	                <span class="author"><a href="https://twitter.com/gszauer">Gabor Szauer</a></span>
+	                <a href="https://www.amazon.com/Hands-Game-Animation-Programming-implementation/dp/1800208081/" class="extern">Buy on Amazon</a>
+	                <a href="https://www.packtpub.com/business-other/hands-on-game-animation-programming" class="extern">Buy from Packt</a>
+	                <a href="https://github.com/gszauer/GameAnimationProgramming" class="extern">Code on github</a>
+	            </div>
+        	</div>
+            <div class="info" style="margin-top: 0px; margin-bottom: 0px;">
+                <h1>What's on this page?</h1>
+                <p>This page takes a high level look at <i>some</i> the content covered in chapters 8, 9 and 10 of <strong>Hands-On C++ Game Animation Programming</strong>. The book provides more in depth coverage of these topics, as well as coverage of advanced topics like <strong>Inverse Kinematics</strong>, <strong>Dual Quaternion Skinning</strong> and <strong>Crowd Rendering</strong>. A full table of contents is provided at the end of this page. </p>
             </div>
         </div>
+
         <div class="section">
             <h1 class="title">Introduction</h1>
+
+             <div class="info">
+                <h1>What's on this page?</h1>
+                <p>This page takes a high level look at the contents of chapters 8, 9 and 10 of the book. The book provides more in depth coverage of these topics, as well as coverage of advanced topics like <strong>Inverse Kinematics</strong>, <strong>Dual Quaternion Skinning</strong> and <strong>Crowd Rendering</strong>. A full table of contents is provided at the end of this page. </p>
+            </div>
+
             <p>Generally, game animation can be broken up into three distinct steps. These steps are pose generation, pose modification and skinning. The steps are usually performed in order.</p>
 
             <div class="info">
@@ -632,7 +655,15 @@ public:
 
             <img src="forearm.png" alt="Skinned fore-arm" />
 
+            <p>Each bone describes one transformation that the highlighted part of the mesh must take to reach its desired position. The following image shows all the steps that the fore-arm mesh would have to take to be transformed from the origin of the world to its desired position and highlights the transformation that each bone will apply to the mesh.</p>
+
+            <img src="forearm_directions.png" alt="Skinned fore-arm" />
+
             <p>To deform these vertices along with the bone, we need to introduce a new space to the vertex transform pipeline, <strong>Skin Space</strong>. Skin space is a confusing topic, it's covered more in depth in the book than here. The idea of skin space is to move all vertices in a way that if they are multiplied by the rest pose matrix of the bone they belong to, the vertices end up back in bind pose.</p>
+
+            <p>The image below shows the fore-arm mesh only in skin space. The rest of the mesh remains untouched. Each bone describes one transformation the vertices must make to end up in their desired position.</p>
+
+            <img src="forearm_only.png" alt="Skinned fore-arm" />
 
             <p>How is this skin space useful? Multiplying a skin space vertex by the bind pose of the bone it belongs to puts the vertex back into it's bind pose, but multiplying it by an animated pose will deform the vertex to match that animation.</p>
 
@@ -692,6 +723,10 @@ public:
 
             <a href="http://www.loonygames.com/content/1.6/totb/">
             <img src="relief.png" alt="Skinned fore-arm" /></a>
+
+            <p>Visualizing skin space doesn't make a lot of sense, all of the triangles in a mesh tend to collapse close to origin (0, 0, 0) with some of the larger shapes still making sense. Generally if you see the skin space blob it means an error in the transformation pipeline. For the sake of completeness, the above model looks like this when in skin space:</p>
+
+            <img src="skin_space.png" alt="Skinn space" />
 
 
             <p>Modern aniamtion system don't typically use rigid skinning, instead they use smooth skinning, which will be covered next.</p>
@@ -818,6 +853,85 @@ public:
         <div class="section">
             <h1>Questions? Comments? Rude Remarks?</h1>
             <p>Reach out to me on twitter: <a href="https://twitter.com/gszauer">&commat;gszauer</a></p>
+        </div>
+
+        <div class="section">
+            <h1>Table of Contents</h1>
+            
+            <div class="info">
+                <h1>Chapter 1, Creating a Game Window</h1>
+                <p>Explains how to create a new visual studio project, create a Win32 window, set up an OpenGL 3.3 render context, and enable vsynch. The code samples for this book are compiled against OpenGL 3.3. All the OpenGL code is compatible with the latest version of OpenGL and OpenGL 4.6.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 2, Implementing Vectors</h1>
+                <p>Covers vector math for game animation programming.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 3, Implementing Matrices</h1>
+                <p>Discusses matrix math for game animation programming.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 4, Implementing Quaternions</h1>
+                <p>Explains how to use quaternion math for game animation programming.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 5, Implementing Transforms</h1>
+                <p>Explains how to combine position, rotation, and scale into a transform object. These transform objects can be arranged in a hierarchy.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 6, Building an Abstract Renderer</h1>
+                <p>Shows you how to create an abstraction layer on top of OpenGL 3.3. The rest of this book will use this abstraction for rendering. By using an abstraction, we can focus on the core concepts of animation programming instead of the API being used to implement it. The abstraction layer targets OpenGL 3.3, but the code is valid with OpenGL 4.6 as well.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 7, Understanding the glTF File Format</h1>
+                <p>Introduces the glTF file format. glTF  is a standard open file format that is supported by most 3D content creation tools. Being able to load a common format will let you load animation authored in almost any creation tool.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 8 Creating Curves, Frames, and Tracks</h1>
+                <p>Covers how to interpolate curves and how cruces can be used to animate transforms stored in a hierarchy.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 9, Implementing Animation Clips</h1>
+                <p>Explains how to implement animation clips. Animation clips modify a transform hierarchy over time.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 10, Mesh Skinning</h1>
+                <p>Covers how to deform a mesh so that it matches the pose generated by sampling an animation clip.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 11, Optimizing the Animation Pipeline</h1>
+                <p>Shows you how to optimize parts of the animation pipeline to make it faster and more production-ready.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 12, Blending between Animations</h1>
+                <p>Explains how to blend two animated poses together. This technique can be used to switch between two animations smoothly, without any visual popping.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 13, Implementing Inverse Kinematics</h1>
+                <p>Covers how to use inverse kinematics to make animations interact with the environment. For example, you'll learn how to make an animated character's foot not penetrate the ground on uneven terrain.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 14, Using Dual Quaternions for Skinning</h1>
+                <p>Covers dual quaternion math for game animation. Dual quaternions can be used to avoid pinching at animated joints.</p>
+            </div>
+
+            <div class="info">
+                <h1>Chapter 15, Rendering Instanced Crowds</h1>
+                <p>Shows how to encode animation data to a texture and move pose generation into a vertex shader. You will use this technique to render  a large crowd using instancing.</p>
+            </div>
         </div>
     </body>
 </html>
