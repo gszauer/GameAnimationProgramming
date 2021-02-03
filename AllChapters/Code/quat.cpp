@@ -92,7 +92,7 @@ bool operator==(const quat& left, const quat& right) {
 	return (fabsf(left.x - right.x) <= QUAT_EPSILON && 
 		    fabsf(left.y - right.y) <= QUAT_EPSILON && 
 		    fabsf(left.z - right.z) <= QUAT_EPSILON && 
-		    fabsf(left.w - left.w) <= QUAT_EPSILON);
+		    fabsf(left.w - right.w) <= QUAT_EPSILON);
 }
 
 bool operator!=(const quat& a, const quat& b) {
@@ -101,9 +101,9 @@ bool operator!=(const quat& a, const quat& b) {
 
 bool sameOrientation(const quat& left, const quat& right) {
 	return (fabsf(left.x - right.x) <= QUAT_EPSILON && fabsf(left.y - right.y) <= QUAT_EPSILON && 
-		    fabsf(left.z - right.z) <= QUAT_EPSILON && fabsf(left.w - left.w) <= QUAT_EPSILON)
+		    fabsf(left.z - right.z) <= QUAT_EPSILON && fabsf(left.w - right.w) <= QUAT_EPSILON)
 		|| (fabsf(left.x + right.x) <= QUAT_EPSILON && fabsf(left.y + right.y) <= QUAT_EPSILON && 
-			fabsf(left.z + right.z) <= QUAT_EPSILON && fabsf(left.w + left.w) <= QUAT_EPSILON);
+			fabsf(left.z + right.z) <= QUAT_EPSILON && fabsf(left.w + right.w) <= QUAT_EPSILON);
 }
 
 float dot(const quat& a, const quat& b) {
