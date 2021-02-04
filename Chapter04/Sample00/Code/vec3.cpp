@@ -74,7 +74,7 @@ float angle(const vec3& l, const vec3& r) {
 }
 
 vec3 project(const vec3& a, const vec3& b) {
-	float magBSq = len(b);
+	float magBSq = lenSq(b);
 	if (magBSq < VEC3_EPSILON) {
 		return vec3();
 	}
@@ -88,7 +88,7 @@ vec3 reject(const vec3& a, const vec3& b) {
 }
 
 vec3 reflect(const vec3& a, const vec3& b) {
-	float magBSq = len(b);
+	float magBSq = lenSq(b);
 	if (magBSq < VEC3_EPSILON) {
 		return vec3();
 	}
